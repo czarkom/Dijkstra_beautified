@@ -2,6 +2,7 @@ import Dijkstra.City;
 import Dijkstra.Graph;
 
 public class Printer {
+
     public static void showDistances(double[] foundDistances, Graph graph, int ID) {
         City startCity = graph.graphNodes.get(ID);
 
@@ -26,4 +27,5 @@ public class Printer {
             System.out.printf(distancePrompt, startCity.name, currentlyHeldCity.name, foundDistances[i]);
         }
     }
+
 }

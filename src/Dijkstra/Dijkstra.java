@@ -5,15 +5,13 @@ import java.security.InvalidParameterException;
 public class Dijkstra {
 
     private Graph graph;
-    private boolean[] isVisited;
 
     public Dijkstra(Data data) {
         this.graph = new Graph(data.names, data.cities);
-        isVisited = new boolean[graph.amountOfNodes];
     }
 
     public double[] findShortestDistances(int ID) {
-        int amountOfNodes = graph.amountOfNodes;
+        int amountOfNodes = graph.graphNodes.size();
         if (ID < 0 || ID > amountOfNodes - 1) {
             String message = "Invalid starter point identifier detected. Please enter an integer from range (0, " + (amountOfNodes - 1) + ").";
             throw new InvalidParameterException(message);
@@ -29,8 +27,13 @@ public class Dijkstra {
         }
 
         for (int i = 0; i < amountOfNodes; i++) {
-            City notVisitedNode = getNotVisitedNode(isVisited, distances);
-            isVisited[notVisitedNode.id] = true;
+            City notVisitedNode = getNotVisitedNode(graph, distances);
+
+            if(notVisitedNode == null){
+                continue;
+            }
+            notVisitedNode.isVisited = true;
+
             for (int j = 0; j < amountOfNodes; j++) {
                 if (distances[notVisitedNode.id] < Double.POSITIVE_INFINITY
                         && notVisitedNode.distances[j] > 0
@@ -43,17 +46,19 @@ public class Dijkstra {
         return distances;
     }
 
-    private City getNotVisitedNode(boolean[] isVisited, double[] distances) {
-        int n = isVisited.length;
-        int minDistanceId = Integer.MIN_VALUE;
-        double minDistance = Integer.MAX_VALUE;
+    private City getNotVisitedNode(Graph graph, double[] distances) {
+        int n = graph.graphNodes.size();
+        City notVisitedNode = null;
+        double minDistance = Double.MAX_VALUE;
+
         for (int i = 0; i < n; i++) {
-            if (distances[i] < minDistance && !isVisited[i]) {
+            City currentlyHeldCity = graph.graphNodes.get(i);
+            if (distances[i] < minDistance && !currentlyHeldCity.isVisited) {
                 minDistance = distances[i];
-                minDistanceId = i;
+                notVisitedNode = currentlyHeldCity;
             }
         }
-        return graph.graphNodes.get(minDistanceId);
+        return notVisitedNode;
     }
 
     public Graph getGraph() {
