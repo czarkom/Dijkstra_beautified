@@ -1,13 +1,11 @@
 package Dijkstra;
 
 import java.security.InvalidParameterException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Dijkstra {
 
     private Graph graph;
     private boolean[] isVisited;
-    private double[] foundDistances;
 
     public Dijkstra(Data data) {
         this.graph = new Graph(data.names, data.cities);
@@ -42,34 +40,7 @@ public class Dijkstra {
             }
         }
 
-        foundDistances = distances; // TODO
-        showDistances(ID); // TODO
         return distances;
-    }
-
-    // TODO
-    private void showDistances(int ID) {
-        City startCity = graph.graphNodes.get(ID);
-
-        int longestName = 0;
-
-        for (int i = 0; i < foundDistances.length; i++) {
-            if (i == ID) continue;
-
-            City currentlyHeldCity = graph.graphNodes.get(i);
-
-            if(currentlyHeldCity.name.length() > longestName) longestName = currentlyHeldCity.name.length();
-        }
-
-        String distancePrompt = String.format("%%s -> %%%ds = %%.0f%n", longestName);
-
-        for (int i = 0; i < foundDistances.length; i++) {
-            if (i == ID) continue;
-
-            City currentlyHeldCity = graph.graphNodes.get(i);
-
-            System.out.printf(distancePrompt, startCity.name, currentlyHeldCity.name, foundDistances[i]);
-        }
     }
 
     private City getNotVisitedNode(boolean[] isVisited, double[] distances) {
@@ -83,6 +54,10 @@ public class Dijkstra {
             }
         }
         return graph.graphNodes.get(minDistanceId);
+    }
+
+    public Graph getGraph() {
+        return graph;
     }
 
 }

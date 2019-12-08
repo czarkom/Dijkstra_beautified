@@ -10,7 +10,8 @@ public class Main {
 
         int starterPointID = 0;
         try {
-            dijkstra.findShortestDistances(starterPointID);
+            double[] result = dijkstra.findShortestDistances(starterPointID);
+            Printer.showDistances(result, dijkstra.getGraph(), starterPointID);
         } catch (InvalidParameterException e) {
             System.out.println(e.getMessage());
         }
