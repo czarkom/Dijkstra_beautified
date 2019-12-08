@@ -1,6 +1,7 @@
 package Dijkstra;
 
 import java.security.InvalidParameterException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Dijkstra {
 
@@ -49,10 +50,25 @@ public class Dijkstra {
     // TODO
     private void showDistances(int ID) {
         City startCity = graph.graphNodes.get(ID);
+
+        int longestName = 0;
+
         for (int i = 0; i < foundDistances.length; i++) {
             if (i == ID) continue;
+
             City currentlyHeldCity = graph.graphNodes.get(i);
-            System.out.println(startCity.name + " -> " + currentlyHeldCity.name + " = " + foundDistances[i]);
+
+            if(currentlyHeldCity.name.length() > longestName) longestName = currentlyHeldCity.name.length();
+        }
+
+        String distancePrompt = String.format("%%s -> %%%ds = %%.0f%n", longestName);
+
+        for (int i = 0; i < foundDistances.length; i++) {
+            if (i == ID) continue;
+
+            City currentlyHeldCity = graph.graphNodes.get(i);
+
+            System.out.printf(distancePrompt, startCity.name, currentlyHeldCity.name, foundDistances[i]);
         }
     }
 
