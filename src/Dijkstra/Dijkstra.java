@@ -29,7 +29,7 @@ public class Dijkstra {
         for (int i = 0; i < amountOfNodes; i++) {
             City notVisitedNode = getNotVisitedNode(graph, distances);
 
-            if(notVisitedNode == null){
+            if (notVisitedNode == null) {
                 continue;
             }
             notVisitedNode.isVisited = true;

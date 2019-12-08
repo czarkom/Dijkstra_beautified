@@ -8,7 +8,7 @@ public class Main {
         InputDownloader inputDownloader = new InputDownloader();
         Dijkstra dijkstra = new Dijkstra(inputDownloader.getData());
 
-        int starterPointID = 1;
+        int starterPointID = 3;
         try {
             double[] result = dijkstra.findShortestDistances(starterPointID);
             Printer.showDistances(result, dijkstra.getGraph(), starterPointID);

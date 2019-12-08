@@ -17,7 +17,7 @@ public class Printer {
         }
 
         String distancePrompt = String.format("%%s -> %%%ds = %%.0f%n", longestName);
-        System.out.println("Czasy podróży z " + startCity.name + " do poszczególnych miast:");
+        System.out.println("Koszty podróży z " + startCity.name + " do poszczególnych miast:");
 
         for (int i = 0; i < foundDistances.length; i++) {
             if (i == ID) continue;
