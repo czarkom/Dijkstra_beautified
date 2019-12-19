@@ -1,5 +1,6 @@
 import Dijkstra.Data;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,6 +11,13 @@ public class InputDownloader {
     public InputDownloader() {
         double[][] distances = getDistancesForCitiesFromInput();
         ArrayList<String> names = getNamesForCitiesFromInput();
+
+        if (distances.length != names.size())
+            throw new InvalidParameterException(
+                    String.format("Podano złą liczbę miast w stosunku do matrycy sąsiedztwa. Podana ilość: %d, wymagana ilość: %d",
+                            names.size(),
+                            distances.length));
+
         data = new Data(names, distances);
     }
 
@@ -29,7 +37,7 @@ public class InputDownloader {
     }
 
     private ArrayList<String> getNamesForCitiesFromInput() {
-        ArrayList<String> namesForCities = new ArrayList<>(Arrays.asList("Nowy Jork", "Hong Kong", "Piła", "Tokio", "Warszawa", "Serock"));
+        ArrayList<String> namesForCities = new ArrayList<>(Arrays.asList("Nowy Jork", "Hong Kong", "Piła", "Tokio", "Warszawa"));
         return namesForCities;
     }
 
