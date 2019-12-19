@@ -34,6 +34,12 @@ public class InputDownloader {
                                     i + 1,
                                     j + 1));
                 }
+                else if(distances[i][j] > Double.MAX_VALUE){
+                    throw new InvalidParameterException(
+                            String.format("Podano zbyt dużą wagę połączenia miast w wierszu: %d, kolumnie: %d",
+                                    i + 1,
+                                    j + 1));
+                }
             }
         }
 
@@ -51,7 +57,8 @@ public class InputDownloader {
                 {0, 0, 0, 0, 0, 4},
                 {0, 100, 0, 0, 0, 0},
                 {0, 0, 0, 1, 0, 3},
-                {0, 0, 0, 0, 0, 0}};
+                {0, 0, 0, 0, 0, 0}
+        };
         return cities;
     }
 

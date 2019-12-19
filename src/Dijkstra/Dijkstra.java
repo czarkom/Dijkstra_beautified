@@ -35,6 +35,11 @@ public class Dijkstra {
             notVisitedNode.isVisited = true;
 
             for (int j = 0; j < amountOfNodes; j++) {
+                if(distances[notVisitedNode.id] + notVisitedNode.distances[j] > Double.MAX_VALUE){
+                    throw new InvalidParameterException(
+                            String.format("Analizowane dane zawierają zbyt duże wagi do przeliczenia.")
+                    );
+                }
                 if (distances[notVisitedNode.id] < Double.POSITIVE_INFINITY
                         && notVisitedNode.distances[j] > 0
                         && distances[notVisitedNode.id] + notVisitedNode.distances[j] < distances[j]) {
